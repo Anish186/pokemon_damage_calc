@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Pokemon</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+  <div id="container">
+    <h2>Pokemon Damage Calculator</h2>
+
+      <label for="level">Level:</label>
+      <button id="lvl_info">info</button> <br>
+      <div class="holder">
+        <p id="lvl-info">Input the level of the Pokemon into this box, the number must be between 1-100</p>
+      </div>
+      <input type="number" id="level" required />
+
+      <br /><br />
+
+      <label for="atk_st">Attack Stat:</label> 
+      <button id="atk_st_info">info</button> <br>
+      <div class="holder">
+        <p id="atk_st-info">Input the Attack stat of the Pokemon which you are attacking with, 
+          <br>this can be done through searching a pokemon max attack stat on a website such as pokemondb.</p>
+      </div>
+      <input type="number" id="atk_st" required />
+
+      <br /><br />
+
+      <label for="atk_pr">Attack Power:</label>
+      <button id="atk_pr_info">info</button> <br>
+      <div class="holder">
+        <p id="atk_pr-info">Input the power of the move you intend on using, for example thunderbolt has a power of 90, <br>
+        the power of moves can be found on websites like pokemondb.</p>
+      </div>
+      <input type="number" id="atk_pr" required />
+
+      <br /><br />
+
+      <label for="def_st">Defense Stat:</label> 
+      <button id="def_st_info">info</button> <br>
+      <div class="holder">
+        <p id="def_st-info">Input the defence stat of the pokemon which is on the opposing side, 
+          <br>this can be done through searching a pokemon max attack stat on a website such as pokemondb.</p>
+      </div>
+      <input type="number" id="def_st" required />
+
+      <br /><br />
+
+      <label for="wk_res">Weakness/Resistance:</label>
+      <button id="res_info">info</button> <br>
+      <div class="holder">
+        <p id="res-info">Enter in a decimal less than 1 for resistance, a number over 1 for Weakness <br>
+        Input the weakness, the weakness quantity of the attacking move is based on the opposing pokemon's typing, <br>
+      this can be done through looking at the </p> <a href="type_chart.html">Type Chart:</a>
+      </div>
+      <input type="number" id="wk_res" /> 
+
+      <br><br>
+
+      <label for="stab">Stab:</label> 
+      <button id="stab_info">info</button> <br>
+      <div class="holder">
+        <p id="stab-info">STAB is an acronym for the same type attack bonus which means<br> 
+          if the pokemon has the same typing as the move used it will be STAB</p>
+      </div>
+      <input type="radio" id="stab_yes" value="1.5" name="stab" />Yes
+      <input type="radio" id="stab_no" value="1" name="stab" />No
+      
+      <br /><br />
+
+      <input type="submit" id="sub" value="Calculate" />
+      <p id="calculation"></p>
+    </div>
+
+    <div class="img">
+      <img id="p_img" src="red.gif"/>
+    </div>
+
+    <script type="text/javascript">
+      document.getElementById("sub").onclick = function () {
+        var level = parseInt(document.getElementById("level").value);
+        var atk_stat = parseFloat(document.getElementById("atk_st").value);
+        var atk_pr = parseFloat(document.getElementById("atk_pr").value);
+        var def_st = parseFloat(document.getElementById("def_st").value);
+        var wk_res = parseFloat(document.getElementById("wk_res").value);
+        var stab = parseFloat(
+          document.querySelector('input[name="stab"]:checked').value
+        );
+
+        if (atk_stat > 255 || def_st > 255 || atk_pr > 500 || level > 100) {
+          alert("Sorry the numbers don't add up, ensure that you have the right values!")
+          $("#level").val("");
+          $("#atk_st").val("");
+          $("#def_st").val("");
+          $("#wk_res").val("");
+          $("#atk_pr").val("");
+        } else {
+          var math_stuff =
+            (((2 * level + 10) / 250) * (atk_stat / def_st) * atk_pr + 2) * stab * wk_res * ((Math.random() + 85) / 100); 
+          var answer = Math.floor(math_stuff);
+
+          var txt = "The answer is: ";
+          document.getElementById("calculation").innerHTML = txt + answer;
+        }
+      };
+
+      document.getElementById("lvl_info").onclick = function () {
+        var fill = document.querySelector("#lvl-info");
+
+        if (fill.style.display === "flex") {
+          fill.style.display = "none";
+        } else {
+          fill.style.display = "flex";
+        }
+      };
+      document.getElementById("atk_st_info").onclick = function () {
+        var fill = document.querySelector("#atk_st-info");
+
+        if (fill.style.display === "flex") {
+          fill.style.display = "none";
+        } else {
+          fill.style.display = "flex";
+        }
+      };
+      document.getElementById("atk_pr_info").onclick = function () {
+        var fill = document.querySelector("#atk_pr-info");
+
+        if (fill.style.display === "flex") {
+          fill.style.display = "none";
+        } else {
+          fill.style.display = "flex";
+        }
+      };
+      document.getElementById("def_st_info").onclick = function () {
+        var fill = document.querySelector("#def_st-info");
+
+        if (fill.style.display === "flex") {
+          fill.style.display = "none";
+        } else {
+          fill.style.display = "flex";
+        }
+      };
+      document.getElementById("res_info").onclick = function () {
+        var fill = document.querySelector("#res-info");
+
+        if (fill.style.display === "flex") {
+          fill.style.display = "none";
+        } else {
+          fill.style.display = "flex";
+        }
+      };
+      document.getElementById("stab_info").onclick = function () {
+        var fill = document.querySelector("#stab-info");
+
+        if (fill.style.display === "flex") {
+          fill.style.display = "none";
+        } else {
+          fill.style.display = "flex";
+        }
+      };
+    </script>
+  </body>
+</html>
