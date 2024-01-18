@@ -91,6 +91,7 @@ h2 {
 }
 
 #p_img {
+    z-index: -1;
     position: absolute;
     left: 50px;
     bottom: 200px;
@@ -98,4 +99,8 @@ h2 {
     height: 400px;
 }
 
-#caluclation {}
+#calculation {
+    border-top: 3px solid black;
+    padding-top: 10px;
+    font-size: 22px;
+}
